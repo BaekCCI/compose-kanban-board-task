@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun Card(title: String, content: String, chips: List<String>, user: String) {
+fun Card(title: String = "제목없음", content: String = "", chips: List<String> = emptyList(), user: String = "알수없음") {
     Column(
         modifier = Modifier
             .clip(shape = RoundedCornerShape(10.dp))
@@ -43,13 +43,15 @@ fun Card(title: String, content: String, chips: List<String>, user: String) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Title(title)
-        Content(content)
-        FlowRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp),
-        ) {
-            chips.take(5).forEach { chip ->
-                Chip(chip)
+        if (content.isNotBlank()) Content(content)
+        if (chips.isNotEmpty()) {
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                chips.take(5).forEach { chip ->
+                    Chip(chip)
+                }
             }
         }
         User(name = user)
@@ -57,7 +59,7 @@ fun Card(title: String, content: String, chips: List<String>, user: String) {
 }
 
 @Composable
-fun Title(title: String = "제목없음") {
+fun Title(title: String) {
     Text(
         text = title,
         fontSize = 16.sp,
@@ -94,7 +96,7 @@ fun Chip(content: String) {
 }
 
 @Composable
-fun User(name: String = "알 수 없음") {
+fun User(name: String) {
     Box {
         Box(
             modifier = Modifier.background(Color(0xfff3f4f6)).fillMaxWidth().height(1.dp).align(Alignment.TopCenter),

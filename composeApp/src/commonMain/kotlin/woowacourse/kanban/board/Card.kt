@@ -44,6 +44,7 @@ fun Card(title: String, content: String, chips: List<String>, user: String) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Title(title)
+        Content(content)
     }
 }
 
@@ -55,6 +56,18 @@ fun Title(title: String = "제목없음") {
         fontWeight = FontWeight.W500,
         color = Color(0xff101828),
         maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+    )
+}
+
+@Composable
+fun Content(content: String) {
+    Text(
+        text = content,
+        fontSize = 14.sp,
+        fontWeight = FontWeight.W400,
+        color = Color(0xff4a5565),
+        maxLines = 2,
         overflow = TextOverflow.Ellipsis,
     )
 }

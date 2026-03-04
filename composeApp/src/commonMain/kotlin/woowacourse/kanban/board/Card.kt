@@ -45,6 +45,14 @@ fun Card(title: String, content: String, chips: List<String>, user: String) {
     ) {
         Title(title)
         Content(content)
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            chips.take(5).forEach { chip ->
+                Chip(chip)
+            }
+        }
     }
 }
 
@@ -70,6 +78,19 @@ fun Content(content: String) {
         maxLines = 2,
         overflow = TextOverflow.Ellipsis,
     )
+}
+
+@Composable
+fun Chip(content: String) {
+    Text(
+        text = content.take(5),
+        fontSize = 12.sp,
+        fontWeight = FontWeight.W400,
+        color = Color(0xff364153),
+        modifier = Modifier.clip(shape = RoundedCornerShape(100.dp)).background(Color(0xffF3F4F6))
+            .padding(horizontal = 8.dp, vertical = 4.dp),
+
+        )
 }
 
 @Composable

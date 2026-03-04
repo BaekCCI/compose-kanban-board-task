@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -53,6 +52,7 @@ fun Card(title: String, content: String, chips: List<String>, user: String) {
                 Chip(chip)
             }
         }
+        User(name = user)
     }
 }
 
@@ -91,6 +91,41 @@ fun Chip(content: String) {
             .padding(horizontal = 8.dp, vertical = 4.dp),
 
         )
+}
+
+@Composable
+fun User(name: String = "알 수 없음") {
+    Box {
+        Box(
+            modifier = Modifier.background(Color(0xfff3f4f6)).fillMaxWidth().height(1.dp).align(Alignment.TopCenter),
+        )
+
+        Row(
+            modifier = Modifier.padding(vertical = 10.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                modifier = Modifier.size(24.dp).clip(CircleShape).background(color = Color.White)
+                    .border(width = 2.dp, color = Color(0xff838383), shape = CircleShape),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.AccountBox,
+                    contentDescription = "profile image",
+                    tint = Color(0xff838383),
+                    modifier = Modifier.clip(CircleShape).requiredSize(size = 33.dp),
+                )
+            }
+            Text(
+                text = name,
+                fontWeight = FontWeight.W500,
+                fontSize = 14.sp,
+                color = Color(0xff364153),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
+    }
 }
 
 @Composable

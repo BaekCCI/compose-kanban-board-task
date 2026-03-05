@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
@@ -17,6 +15,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -98,9 +97,7 @@ fun Chip(content: String) {
 @Composable
 fun User(name: String) {
     Box {
-        Box(
-            modifier = Modifier.background(Color(0xfff3f4f6)).fillMaxWidth().height(1.dp).align(Alignment.TopCenter),
-        )
+        HorizontalDivider(color = Color(0xfff3f4f6), thickness = 1.dp)
 
         Row(
             modifier = Modifier.padding(vertical = 10.dp),

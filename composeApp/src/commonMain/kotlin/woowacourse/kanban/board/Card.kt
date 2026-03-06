@@ -57,7 +57,7 @@ fun Card(
 @Composable
 fun Title(title: String) {
     Text(
-        text = title,
+        text = title.ifEmpty { "제목 없음" },
         fontSize = 16.sp,
         fontWeight = FontWeight.W500,
         color = Color(0xff101828),
@@ -124,7 +124,7 @@ fun User(name: String) {
                 )
             }
             Text(
-                text = name,
+                text = name.ifBlank { "알 수 없음" },
                 fontWeight = FontWeight.W500,
                 fontSize = 14.sp,
                 color = Color(0xff364153),
@@ -162,6 +162,12 @@ class CardPreviewParameterProvider : PreviewParameterProvider<CardData> {
             content = "너무너무너무 긴 설명은 두 줄까지만 노출하고 말줄임표로 처리합니다 두 줄까지만 노출하고 말줄임표로 처리합니다",
             chips = listOf("너무너무", "긴 태그", "최대로", "5자까지", "5개제한임"),
             user = "너무너무너무 긴 담당자도 한 줄 너무너무너무 긴 담당자도 한 줄",
+        ),
+        CardData(
+            title = "",
+            content = "너무너무너무 긴 설명은 두 줄까지만 노출하고 말줄임표로 처리합니다 두 줄까지만 노출하고 말줄임표로 처리합니다",
+            chips = listOf("너무너무", "긴 태그", "최대로", "5자까지", "5개제한임"),
+            user = "   ",
         ),
     )
 }

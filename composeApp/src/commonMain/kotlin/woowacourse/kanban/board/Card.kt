@@ -26,27 +26,31 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun Card(title: String = "제목없음", content: String = "", chips: List<String> = emptyList(), user: String = "알수없음") {
+fun Card(
+    cardData: CardData,
+) {
+    val shape = RoundedCornerShape(10.dp)
+
     Column(
         modifier = Modifier
-            .clip(shape = RoundedCornerShape(10.dp))
+            .clip(shape = shape)
             .background(Color.White)
-            .border(width = 1.dp, shape = RoundedCornerShape(10.dp), color = Color(0xffe5e7eb))
-            .padding(17.dp, 17.dp, 17.dp, 1.dp)
+            .border(width = 1.dp, shape = shape, color = Color(0xffe5e7eb))
+            .padding(17.dp)
             .width(286.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Title(title)
-        if (content.isNotBlank()) Content(content)
-        if (chips.isNotEmpty()) {
-            Chips(chips)
-        }
-        User(name = user)
+        Title(cardData.title)
+        if (cardData.content != null) Content(cardData.content)
+        if (cardData.chips.isNotEmpty()) Chips(cardData.chips)
+        User(cardData.user)
     }
 }
 
@@ -131,38 +135,41 @@ fun User(name: String) {
     }
 }
 
-@Composable
-@Preview
-fun CardPreview() {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        Card(
+class CardPreviewParameterProvider : PreviewParameterProvider<CardData> {
+    override val values = sequenceOf(
+        CardData(
             title = "LazyColumn 컴포넌트 구현",
             content = "세로 스크롤 가능한 리스트 컴포넌트를 만들고 성능 최적화를 적용합니다.",
             chips = listOf("컴포넌트", "성능"),
             user = "다이노",
-        )
-        Card(
+        ),
+        CardData(
             title = "LazyColumn 컴포넌트 구현",
             chips = listOf("컴포넌트", "성능"),
             user = "다이노",
-        )
-        Card(
+        ),
+        CardData(
             title = "LazyColumn 컴포넌트 구현",
             content = "세로 스크롤 가능한 리스트 컴포넌트를 만들고 성능 최적화를 적용합니다.",
             user = "다이노",
-        )
-        Card(
+        ),
+        CardData(
             title = "LazyColumn 컴포넌트 구현",
             user = "다이노",
-        )
-
-        Card(
+        ),
+        CardData(
             title = "LazyColumn 컴포넌트 구현",
             content = "너무너무너무 긴 설명은 두 줄까지만 노출하고 말줄임표로 처리합니다 두 줄까지만 노출하고 말줄임표로 처리합니다",
             chips = listOf("너무너무", "긴 태그", "최대로", "5자까지", "5개제한임"),
             user = "너무너무너무 긴 담당자도 한 줄 너무너무너무 긴 담당자도 한 줄",
-        )
-    }
+        ),
+    )
+}
+
+@Composable
+@Preview
+fun CardPreview(
+    @PreviewParameter(CardPreviewParameterProvider::class) data: CardData,
+) {
+    Card(data)
 }

@@ -31,7 +31,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-
 @Composable
 fun Card(
     cardData: CardData,
@@ -42,7 +41,7 @@ fun Card(
         modifier = Modifier
             .clip(shape = shape)
             .background(Color.White)
-            .border(width = 1.dp, shape = shape, color = Color(0xffe5e7eb))
+            .border(width = 1.dp, shape = shape, color = Gray200)
             .padding(17.dp)
             .width(286.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -60,7 +59,7 @@ fun Title(title: String) {
         text = title.ifEmpty { "제목 없음" },
         fontSize = 16.sp,
         fontWeight = FontWeight.W500,
-        color = Color(0xff101828),
+        color = Gray900,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
     )
@@ -72,7 +71,7 @@ fun Content(content: String) {
         text = content,
         fontSize = 14.sp,
         fontWeight = FontWeight.W400,
-        color = Color(0xff4a5565),
+        color = Gray600,
         maxLines = 2,
         overflow = TextOverflow.Ellipsis,
     )
@@ -96,8 +95,8 @@ fun Chip(content: String) {
         text = content,
         fontSize = 12.sp,
         fontWeight = FontWeight.W400,
-        color = Color(0xff364153),
-        modifier = Modifier.clip(shape = RoundedCornerShape(100.dp)).background(Color(0xffF3F4F6))
+        color = Gray700,
+        modifier = Modifier.clip(shape = RoundedCornerShape(100.dp)).background(Gray100)
             .padding(horizontal = 8.dp, vertical = 4.dp),
     )
 }
@@ -105,7 +104,7 @@ fun Chip(content: String) {
 @Composable
 fun User(name: String) {
     Box {
-        HorizontalDivider(color = Color(0xfff3f4f6), thickness = 1.dp)
+        HorizontalDivider(color = Gray100, thickness = 1.dp)
 
         Row(
             modifier = Modifier.padding(vertical = 10.dp),
@@ -114,12 +113,12 @@ fun User(name: String) {
         ) {
             Box(
                 modifier = Modifier.size(24.dp).clip(CircleShape).background(color = Color.White)
-                    .border(width = 2.dp, color = Color(0xff838383), shape = CircleShape),
+                    .border(width = 2.dp, color = Gray500, shape = CircleShape),
             ) {
                 Icon(
                     imageVector = Icons.Default.AccountBox,
                     contentDescription = "profile image",
-                    tint = Color(0xff838383),
+                    tint = Gray500,
                     modifier = Modifier.clip(CircleShape).requiredSize(size = 33.dp),
                 )
             }
@@ -127,7 +126,7 @@ fun User(name: String) {
                 text = name.ifBlank { "알 수 없음" },
                 fontWeight = FontWeight.W500,
                 fontSize = 14.sp,
-                color = Color(0xff364153),
+                color = Gray700,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )

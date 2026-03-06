@@ -31,23 +31,28 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+private const val DEFAULT_TITLE = "제목 없음"
+private const val DEFAULT_USER_NAME = "이름 없음"
+private const val TITLE_MAX_LINE = 1
+private const val CONTENT_MAX_LINE = 2
+private const val MAX_CHIP_SIZE = 5
+private const val MAX_CHIP_LENGTH = 5
+
 @Composable
 fun Card(
     cardData: CardData,
 ) {
-    val shape = RoundedCornerShape(10.dp)
-
     Column(
         modifier = Modifier
-            .clip(shape = shape)
+            .clip(shape = RoundedCornerShape(10.dp))
             .background(Color.White)
-            .border(width = 1.dp, shape = shape, color = Gray200)
+            .border(width = 1.dp, shape = RoundedCornerShape(10.dp), color = Gray200)
             .padding(17.dp)
             .width(286.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Title(cardData.title)
-        if (cardData.content != null) Content(cardData.content)
+        cardData.content?.let { content -> Content(content) }
         if (cardData.chips.isNotEmpty()) Chips(cardData.chips)
         User(cardData.user)
     }
@@ -56,11 +61,11 @@ fun Card(
 @Composable
 fun Title(title: String) {
     Text(
-        text = title.ifEmpty { "제목 없음" },
+        text = title.ifBlank { DEFAULT_TITLE },
         fontSize = 16.sp,
         fontWeight = FontWeight.W500,
         color = Gray900,
-        maxLines = 1,
+        maxLines = TITLE_MAX_LINE,
         overflow = TextOverflow.Ellipsis,
     )
 }
@@ -72,19 +77,21 @@ fun Content(content: String) {
         fontSize = 14.sp,
         fontWeight = FontWeight.W400,
         color = Gray600,
-        maxLines = 2,
+        maxLines = CONTENT_MAX_LINE,
         overflow = TextOverflow.Ellipsis,
     )
 }
 
 @Composable
-fun Chips(tags: List<String>, maxSize: Int = 5, maxLength: Int = 5) {
+fun Chips(
+    tags: List<String>,
+) {
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        tags.take(maxSize).forEach { chip ->
-            Chip(chip.take(maxLength))
+        tags.take(MAX_CHIP_SIZE).forEach { chip ->
+            Chip(chip.take(MAX_CHIP_LENGTH))
         }
     }
 }
@@ -96,13 +103,15 @@ fun Chip(content: String) {
         fontSize = 12.sp,
         fontWeight = FontWeight.W400,
         color = Gray700,
-        modifier = Modifier.clip(shape = RoundedCornerShape(100.dp)).background(Gray100)
+        modifier = Modifier
+            .clip(shape = RoundedCornerShape(100.dp))
+            .background(Gray100)
             .padding(horizontal = 8.dp, vertical = 4.dp),
     )
 }
 
 @Composable
-fun User(name: String) {
+fun User(userData: UserData) {
     Box {
         HorizontalDivider(color = Gray100, thickness = 1.dp)
 
@@ -112,7 +121,9 @@ fun User(name: String) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
-                modifier = Modifier.size(24.dp).clip(CircleShape).background(color = Color.White)
+                modifier = Modifier
+                    .size(24.dp).clip(CircleShape)
+                    .background(color = Color.White)
                     .border(width = 2.dp, color = Gray500, shape = CircleShape),
             ) {
                 Icon(
@@ -123,7 +134,7 @@ fun User(name: String) {
                 )
             }
             Text(
-                text = name.ifBlank { "알 수 없음" },
+                text = userData.name.ifBlank { DEFAULT_USER_NAME },
                 fontWeight = FontWeight.W500,
                 fontSize = 14.sp,
                 color = Gray700,
@@ -140,33 +151,33 @@ class CardPreviewParameterProvider : PreviewParameterProvider<CardData> {
             title = "LazyColumn 컴포넌트 구현",
             content = "세로 스크롤 가능한 리스트 컴포넌트를 만들고 성능 최적화를 적용합니다.",
             chips = listOf("컴포넌트", "성능"),
-            user = "다이노",
+            user = UserData(name = "다이노"),
         ),
         CardData(
             title = "LazyColumn 컴포넌트 구현",
             chips = listOf("컴포넌트", "성능"),
-            user = "다이노",
+            user = UserData(name = "다이노"),
         ),
         CardData(
             title = "LazyColumn 컴포넌트 구현",
             content = "세로 스크롤 가능한 리스트 컴포넌트를 만들고 성능 최적화를 적용합니다.",
-            user = "다이노",
+            user = UserData(name = "다이노"),
         ),
         CardData(
             title = "LazyColumn 컴포넌트 구현",
-            user = "다이노",
+            user = UserData(name = "다이노"),
         ),
         CardData(
             title = "LazyColumn 컴포넌트 구현",
             content = "너무너무너무 긴 설명은 두 줄까지만 노출하고 말줄임표로 처리합니다 두 줄까지만 노출하고 말줄임표로 처리합니다",
             chips = listOf("너무너무", "긴 태그", "최대로", "5자까지", "5개제한임"),
-            user = "너무너무너무 긴 담당자도 한 줄 너무너무너무 긴 담당자도 한 줄",
+            user = UserData(name = "너무너무너무 긴 담당자도 한 줄 너무너무너무 긴 담당자도 한 줄"),
         ),
         CardData(
             title = "",
             content = "너무너무너무 긴 설명은 두 줄까지만 노출하고 말줄임표로 처리합니다 두 줄까지만 노출하고 말줄임표로 처리합니다",
             chips = listOf("너무너무", "긴 태그", "최대로", "5자까지", "5개제한임"),
-            user = "   ",
+            user = UserData(name = "  "),
         ),
     )
 }

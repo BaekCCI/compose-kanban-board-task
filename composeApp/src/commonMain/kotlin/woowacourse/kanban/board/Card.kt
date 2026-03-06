@@ -44,14 +44,7 @@ fun Card(title: String = "제목없음", content: String = "", chips: List<Strin
         Title(title)
         if (content.isNotBlank()) Content(content)
         if (chips.isNotEmpty()) {
-            FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp),
-            ) {
-                chips.take(5).forEach { chip ->
-                    Chip(chip)
-                }
-            }
+            Chips(chips)
         }
         User(name = user)
     }
@@ -82,16 +75,27 @@ fun Content(content: String) {
 }
 
 @Composable
+fun Chips(tags: List<String>, maxSize: Int = 5, maxLength: Int = 5) {
+    FlowRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        tags.take(maxSize).forEach { chip ->
+            Chip(chip.take(maxLength))
+        }
+    }
+}
+
+@Composable
 fun Chip(content: String) {
     Text(
-        text = content.take(5),
+        text = content,
         fontSize = 12.sp,
         fontWeight = FontWeight.W400,
         color = Color(0xff364153),
         modifier = Modifier.clip(shape = RoundedCornerShape(100.dp)).background(Color(0xffF3F4F6))
             .padding(horizontal = 8.dp, vertical = 4.dp),
-
-        )
+    )
 }
 
 @Composable

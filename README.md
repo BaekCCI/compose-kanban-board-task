@@ -1,40 +1,26 @@
-This is a Kotlin Multiplatform project targeting Android, Desktop (JVM).
+# 🚀 칸반 보드 태스크
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+# 기능 목록
 
-### Build and Run Android Application
+## 칸반 보드 태스크 카드 만들기
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+### 제목
 
-### Build and Run Desktop (JVM) Application
+- [x] 제목을 인자로 받아 Text 컴포넌트 생성
+- [x] 한줄이 넘어갈 경우 말 줄임표로 표기
+- [x] 제목이 null일 경우 "제목 없음"으로 표기
 
-To build and run the development version of the desktop app, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:run
-  ```
+### 내용
 
----
+- [x] 내용을 인자로 받아 Text 컴포넌트 생성
+- [x] 두줄이 넘어갈 경우 말 줄임표로 표기
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+### 칩
+
+- [x] 칩 내용을 인자로 받아 Text 컴포넌트 생성
+- [x] 한 칩안의 글자 수 제한(최대 5자)
+- [x] 칩의 개수 제한(최대 5개)
+
+### 유저 정보
+
+- [x] 유저 정보가 null일 경우 "알 수 없음"으로 표기

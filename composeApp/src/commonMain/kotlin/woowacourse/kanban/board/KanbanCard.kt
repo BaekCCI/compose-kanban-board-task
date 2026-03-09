@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 private const val DEFAULT_TITLE = "제목 없음"
-private const val DEFAULT_USER_NAME = "이름 없음"
+private const val UNKNOWN_USER = "알 수 없는 유저"
 private const val TITLE_MAX_LINE = 1
 private const val CONTENT_MAX_LINE = 2
 private const val MAX_CHIP_SIZE = 5
@@ -49,18 +49,18 @@ fun KanbanCard(card: Card) {
             .width(286.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Title(card.title)
+        CardTitle(card.title)
         card.content?.let { content -> Content(content) }
-        if (card.chips.isNotEmpty()) Tags(card.chips)
+        if (card.tags.isNotEmpty()) Tags(card.tags)
         Box {
             HorizontalDivider(color = Gray100, thickness = 1.dp)
-            User(card.user)
+            UserProfile(card.user)
         }
     }
 }
 
 @Composable
-fun Title(title: String) {
+fun CardTitle(title: String) {
     Text(
         text = title.ifBlank { DEFAULT_TITLE },
         fontSize = 16.sp,
@@ -110,7 +110,7 @@ fun Chip(content: String, maxLength: Int = MAX_CHIP_LENGTH) {
 }
 
 @Composable
-fun User(userInfo: UserInfo) {
+fun UserProfile(userInfo: UserInfo?) {
     Row(
         modifier = Modifier.padding(vertical = 10.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -130,7 +130,7 @@ fun User(userInfo: UserInfo) {
             )
         }
         Text(
-            text = userInfo.name.ifBlank { DEFAULT_USER_NAME },
+            text = userInfo?.name ?: UNKNOWN_USER,
             fontWeight = FontWeight.W500,
             fontSize = 14.sp,
             color = Gray700,
@@ -145,12 +145,12 @@ class CardPreviewParameterProvider : PreviewParameterProvider<Card> {
         Card(
             title = "LazyColumn 컴포넌트 구현",
             content = "세로 스크롤 가능한 리스트 컴포넌트를 만들고 성능 최적화를 적용합니다.",
-            chips = listOf("컴포넌트", "성능"),
+            tags = listOf("컴포넌트", "성능"),
             user = UserInfo(name = "다이노"),
         ),
         Card(
             title = "LazyColumn 컴포넌트 구현",
-            chips = listOf("컴포넌트", "성능"),
+            tags = listOf("컴포넌트", "성능"),
             user = UserInfo(name = "다이노"),
         ),
         Card(
@@ -165,14 +165,8 @@ class CardPreviewParameterProvider : PreviewParameterProvider<Card> {
         Card(
             title = "LazyColumn 컴포넌트 구현",
             content = "너무너무너무 긴 설명은 두 줄까지만 노출하고 말줄임표로 처리합니다 두 줄까지만 노출하고 말줄임표로 처리합니다",
-            chips = listOf("너무너무", "긴 태그", "최대로", "5자까지", "5개제한임"),
+            tags = listOf("너무너무", "긴 태그", "최대로", "5자까지", "5개제한임"),
             user = UserInfo(name = "너무너무너무 긴 담당자도 한 줄 너무너무너무 긴 담당자도 한 줄"),
-        ),
-        Card(
-            title = "",
-            content = "너무너무너무 긴 설명은 두 줄까지만 노출하고 말줄임표로 처리합니다 두 줄까지만 노출하고 말줄임표로 처리합니다",
-            chips = listOf("너무너무", "긴 태그", "최대로", "5자까지", "5개제한임"),
-            user = UserInfo(name = "  "),
         ),
     )
 }

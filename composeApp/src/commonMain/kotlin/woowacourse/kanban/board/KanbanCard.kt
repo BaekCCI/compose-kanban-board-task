@@ -65,7 +65,7 @@ fun KanbanCard(card: Card) {
 @Composable
 fun CardTitle(title: String?) {
     Text(
-        text = title ?: DEFAULT_TITLE,
+        text = if (title.isNullOrBlank()) DEFAULT_TITLE else title,
         fontSize = 16.sp,
         fontWeight = FontWeight.W500,
         color = Gray900,

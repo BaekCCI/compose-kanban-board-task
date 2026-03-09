@@ -30,6 +30,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import woowacourse.kanban.board.model.Card
+import woowacourse.kanban.board.model.UserInfo
 
 private const val DEFAULT_TITLE = "제목 없음"
 private const val UNKNOWN_USER = "알 수 없는 유저"
@@ -62,7 +64,7 @@ fun KanbanCard(card: Card) {
 @Composable
 fun CardTitle(title: String) {
     Text(
-        text = title.ifBlank { DEFAULT_TITLE },
+        text = title.ifEmpty { DEFAULT_TITLE },
         fontSize = 16.sp,
         fontWeight = FontWeight.W500,
         color = Gray900,

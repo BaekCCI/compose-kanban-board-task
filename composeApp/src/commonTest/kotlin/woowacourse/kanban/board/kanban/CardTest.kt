@@ -2,7 +2,6 @@ package woowacourse.kanban.board.kanban
 
 import org.junit.Assert.assertThrows
 import org.junit.Test
-import woowacourse.kanban.board.Tags
 import woowacourse.kanban.board.model.Card
 import woowacourse.kanban.board.model.Tag
 import woowacourse.kanban.board.model.UserInfo

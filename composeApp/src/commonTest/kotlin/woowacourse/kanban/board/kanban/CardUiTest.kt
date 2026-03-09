@@ -1,20 +1,14 @@
 package woowacourse.kanban.board.kanban
 
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
-import woowacourse.kanban.board.CardTitle
-import woowacourse.kanban.board.Content
+import kotlin.test.Test
 import woowacourse.kanban.board.KanbanCard
-import woowacourse.kanban.board.Tags
 import woowacourse.kanban.board.model.Card
 import woowacourse.kanban.board.model.Tag
 import woowacourse.kanban.board.model.UserInfo
-import kotlin.test.Test
 
 @OptIn(ExperimentalTestApi::class)
 class CardUiTest {

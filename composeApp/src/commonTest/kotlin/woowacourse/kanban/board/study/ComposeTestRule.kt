@@ -51,7 +51,7 @@ class ComposeTestRule {
             }
         }
         counter = 1
-        waitForIdle() //동기화
+        waitForIdle() // 동기화
         assertThat(counter).isEqualTo(latestCounter)
     }
 
@@ -69,7 +69,7 @@ class ComposeTestRule {
             }
         }
         counter = 1
-        onNodeWithText("1").assertExists()//동기화 할 필요 X
+        onNodeWithText("1").assertExists() // 동기화 할 필요 X
     }
 
     @Test
@@ -87,7 +87,7 @@ class ComposeTestRule {
     fun `노드 병합2`() = runComposeUiTest {
         setContent {
             Button(onClick = {}, modifier = Modifier.testTag("버튼")) {
-                Text("확인",modifier = Modifier.testTag("확인"))
+                Text("확인", modifier = Modifier.testTag("확인"))
                 Text("버튼")
             }
         }

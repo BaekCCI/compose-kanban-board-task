@@ -10,13 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertTextEquals
-import androidx.compose.ui.test.onChild
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.printToLog
 import androidx.compose.ui.test.runComposeUiTest
-import org.assertj.core.api.Assertions.assertThat
 import kotlin.test.Test
+import org.assertj.core.api.Assertions.assertThat
 
 @OptIn(ExperimentalTestApi::class)
 class ComposeTestRule {
@@ -55,7 +54,6 @@ class ComposeTestRule {
         waitForIdle() //동기화
         assertThat(counter).isEqualTo(latestCounter)
     }
-
 
     @Test
     fun `동기화3`() = runComposeUiTest {

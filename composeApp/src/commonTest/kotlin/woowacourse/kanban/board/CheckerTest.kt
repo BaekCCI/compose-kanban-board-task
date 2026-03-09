@@ -12,7 +12,7 @@ import kotlin.test.Test
 class CheckerTest {
 
     @Test
-    fun `버튼 클릭 시 체크 상태 노출 여부 확인`() = runComposeUiTest{
+    fun `버튼 클릭 시 체크 상태 노출 여부 확인`() = runComposeUiTest {
         var checked by mutableStateOf(true)
 
         setContent {

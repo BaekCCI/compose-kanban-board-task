@@ -31,14 +31,15 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.model.Card
+import woowacourse.kanban.board.model.Card.Companion.MAX_TAG_SIZE
+import woowacourse.kanban.board.model.Tag
+import woowacourse.kanban.board.model.Tag.Companion.MAX_TAG_LENGTH
 import woowacourse.kanban.board.model.UserInfo
 
 private const val DEFAULT_TITLE = "제목 없음"
 private const val UNKNOWN_USER = "알 수 없는 유저"
 private const val TITLE_MAX_LINE = 1
 private const val CONTENT_MAX_LINE = 2
-private const val MAX_CHIP_SIZE = 5
-private const val MAX_CHIP_LENGTH = 5
 
 @Composable
 fun KanbanCard(card: Card) {
@@ -86,19 +87,19 @@ fun Content(content: String) {
 }
 
 @Composable
-fun Tags(tags: List<String>, maxSize: Int = MAX_CHIP_SIZE, maxLength: Int = MAX_CHIP_LENGTH) {
+fun Tags(tags: List<Tag>, maxSize: Int = MAX_TAG_SIZE, maxLength: Int = MAX_TAG_LENGTH) {
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        tags.take(maxSize).forEach { chip ->
-            Chip(chip, maxLength)
+        tags.take(maxSize).forEach { tag ->
+            Chip(tag.content, maxLength)
         }
     }
 }
 
 @Composable
-fun Chip(content: String, maxLength: Int = MAX_CHIP_LENGTH) {
+fun Chip(content: String, maxLength: Int = MAX_TAG_LENGTH) {
     Text(
         text = content.take(maxLength),
         fontSize = 12.sp,
@@ -147,12 +148,12 @@ class CardPreviewParameterProvider : PreviewParameterProvider<Card> {
         Card(
             title = "LazyColumn 컴포넌트 구현",
             content = "세로 스크롤 가능한 리스트 컴포넌트를 만들고 성능 최적화를 적용합니다.",
-            tags = listOf("컴포넌트", "성능"),
+            tags = listOf(Tag("컴포넌트"), Tag("성능")),
             user = UserInfo(name = "다이노"),
         ),
         Card(
             title = "LazyColumn 컴포넌트 구현",
-            tags = listOf("컴포넌트", "성능"),
+            tags = listOf(Tag("컴포넌트"), Tag("성능")),
             user = UserInfo(name = "다이노"),
         ),
         Card(
@@ -167,7 +168,7 @@ class CardPreviewParameterProvider : PreviewParameterProvider<Card> {
         Card(
             title = "LazyColumn 컴포넌트 구현",
             content = "너무너무너무 긴 설명은 두 줄까지만 노출하고 말줄임표로 처리합니다 두 줄까지만 노출하고 말줄임표로 처리합니다",
-            tags = listOf("너무너무", "긴 태그", "최대로", "5자까지", "5개제한임"),
+            tags = listOf(Tag("너무너무"), Tag("긴 태그"), Tag("최대로"), Tag("5자까지"), Tag("5개제한임")),
             user = UserInfo(name = "너무너무너무 긴 담당자도 한 줄 너무너무너무 긴 담당자도 한 줄"),
         ),
     )

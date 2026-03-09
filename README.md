@@ -44,6 +44,6 @@
 - [x] 탈퇴한 유저인 경우를 고려해 `Card.user`를 nullable로 설정
 - [x] `user`가 null인 경우 "알 수 없는 유저"로 표기
 
-### 제목
+### 카드
 
-- [x] 제목이 빈 문자열인 경우 예외 처리
+- [x] 제목, 내용, 태그가 모두 NullOrBlank, emptyList일 경우 예외 처리

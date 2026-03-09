@@ -1,4 +1,4 @@
-package woowacourse.kanban.board
+package woowacourse.kanban.board.model
 
 data class UserInfo(val name: String, val profileImg: String? = null) {
     init {

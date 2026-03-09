@@ -39,9 +39,7 @@ private const val MAX_CHIP_SIZE = 5
 private const val MAX_CHIP_LENGTH = 5
 
 @Composable
-fun Card(
-    cardData: CardData,
-) {
+fun Card(cardData: CardData) {
     Column(
         modifier = Modifier
             .clip(shape = RoundedCornerShape(10.dp))
@@ -54,7 +52,10 @@ fun Card(
         Title(cardData.title)
         cardData.content?.let { content -> Content(content) }
         if (cardData.chips.isNotEmpty()) Chips(cardData.chips)
-        User(cardData.user)
+        Box {
+            HorizontalDivider(color = Gray100, thickness = 1.dp)
+            User(cardData.user)
+        }
     }
 }
 
@@ -83,23 +84,21 @@ fun Content(content: String) {
 }
 
 @Composable
-fun Chips(
-    tags: List<String>,
-) {
+fun Chips(tags: List<String>, maxSize: Int = MAX_CHIP_SIZE, maxLength: Int = MAX_CHIP_LENGTH) {
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        tags.take(MAX_CHIP_SIZE).forEach { chip ->
-            Chip(chip.take(MAX_CHIP_LENGTH))
+        tags.take(maxSize).forEach { chip ->
+            Chip(chip, maxLength)
         }
     }
 }
 
 @Composable
-fun Chip(content: String) {
+fun Chip(content: String, maxLength: Int = MAX_CHIP_LENGTH) {
     Text(
-        text = content,
+        text = content.take(maxLength),
         fontSize = 12.sp,
         fontWeight = FontWeight.W400,
         color = Gray700,
@@ -112,36 +111,32 @@ fun Chip(content: String) {
 
 @Composable
 fun User(userData: UserData) {
-    Box {
-        HorizontalDivider(color = Gray100, thickness = 1.dp)
-
-        Row(
-            modifier = Modifier.padding(vertical = 10.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically,
+    Row(
+        modifier = Modifier.padding(vertical = 10.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Box(
+            modifier = Modifier
+                .size(24.dp).clip(CircleShape)
+                .background(color = Color.White)
+                .border(width = 2.dp, color = Gray500, shape = CircleShape),
         ) {
-            Box(
-                modifier = Modifier
-                    .size(24.dp).clip(CircleShape)
-                    .background(color = Color.White)
-                    .border(width = 2.dp, color = Gray500, shape = CircleShape),
-            ) {
-                Icon(
-                    imageVector = Icons.Default.AccountBox,
-                    contentDescription = "profile image",
-                    tint = Gray500,
-                    modifier = Modifier.clip(CircleShape).requiredSize(size = 33.dp),
-                )
-            }
-            Text(
-                text = userData.name.ifBlank { DEFAULT_USER_NAME },
-                fontWeight = FontWeight.W500,
-                fontSize = 14.sp,
-                color = Gray700,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
+            Icon(
+                imageVector = Icons.Default.AccountBox,
+                contentDescription = "profile image",
+                tint = Gray500,
+                modifier = Modifier.clip(CircleShape).requiredSize(size = 33.dp),
             )
         }
+        Text(
+            text = userData.name.ifBlank { DEFAULT_USER_NAME },
+            fontWeight = FontWeight.W500,
+            fontSize = 14.sp,
+            color = Gray700,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
     }
 }
 
@@ -184,8 +179,6 @@ class CardPreviewParameterProvider : PreviewParameterProvider<CardData> {
 
 @Composable
 @Preview
-fun CardPreview(
-    @PreviewParameter(CardPreviewParameterProvider::class) data: CardData,
-) {
+fun CardPreview(@PreviewParameter(CardPreviewParameterProvider::class) data: CardData) {
     Card(data)
 }

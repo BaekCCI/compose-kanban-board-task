@@ -29,7 +29,7 @@ import woowacourse.kanban.board.model.User
 private const val UNKNOWN_USER = "알 수 없는 유저"
 
 @Composable
-fun UserProfile(userInfo: User?, modifier: Modifier = Modifier) {
+fun UserProfile(user: User?, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -49,7 +49,7 @@ fun UserProfile(userInfo: User?, modifier: Modifier = Modifier) {
             )
         }
         Text(
-            text = userInfo?.name ?: UNKNOWN_USER,
+            text = user?.name ?: UNKNOWN_USER,
             fontWeight = FontWeight.W500,
             fontSize = 14.sp,
             color = Gray700,

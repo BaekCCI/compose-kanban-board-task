@@ -4,11 +4,11 @@ import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
-import woowacourse.kanban.board.KanbanCard
+import kotlin.test.Test
 import woowacourse.kanban.board.model.Card
 import woowacourse.kanban.board.model.Tag
 import woowacourse.kanban.board.model.UserInfo
-import kotlin.test.Test
+import woowacourse.kanban.board.ui.KanbanCard
 
 @OptIn(ExperimentalTestApi::class)
 class CardUiTest {

@@ -1,4 +1,4 @@
-package woowacourse.kanban.board
+package woowacourse.kanban.board.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -6,20 +6,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -30,12 +22,15 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import woowacourse.kanban.board.Gray100
+import woowacourse.kanban.board.Gray200
+import woowacourse.kanban.board.Gray600
+import woowacourse.kanban.board.Gray900
 import woowacourse.kanban.board.model.Card
 import woowacourse.kanban.board.model.Tag
 import woowacourse.kanban.board.model.UserInfo
 
 private const val DEFAULT_TITLE = "제목 없음"
-private const val UNKNOWN_USER = "알 수 없는 유저"
 private const val TITLE_MAX_LINE = 1
 private const val CONTENT_MAX_LINE = 2
 
@@ -55,7 +50,7 @@ fun KanbanCard(card: Card) {
         if (card.tags.isNotEmpty()) Tags(card.tags)
         Box {
             HorizontalDivider(color = Gray100, thickness = 1.dp)
-            UserProfile(card.user)
+            UserProfile(card.user, Modifier.padding(10.dp))
         }
     }
 }
@@ -93,51 +88,6 @@ fun Tags(tags: List<Tag>) {
         tags.forEach { tag ->
             Chip(tag.content)
         }
-    }
-}
-
-@Composable
-fun Chip(content: String) {
-    Text(
-        text = content,
-        fontSize = 12.sp,
-        fontWeight = FontWeight.W400,
-        color = Gray700,
-        modifier = Modifier
-            .clip(shape = RoundedCornerShape(100.dp))
-            .background(Gray100)
-            .padding(horizontal = 8.dp, vertical = 4.dp),
-    )
-}
-
-@Composable
-fun UserProfile(userInfo: UserInfo?) {
-    Row(
-        modifier = Modifier.padding(vertical = 10.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Box(
-            modifier = Modifier
-                .size(24.dp).clip(CircleShape)
-                .background(color = Color.White)
-                .border(width = 2.dp, color = Gray500, shape = CircleShape),
-        ) {
-            Icon(
-                imageVector = Icons.Default.AccountBox,
-                contentDescription = "profile image",
-                tint = Gray500,
-                modifier = Modifier.clip(CircleShape).requiredSize(size = 33.dp),
-            )
-        }
-        Text(
-            text = userInfo?.name ?: UNKNOWN_USER,
-            fontWeight = FontWeight.W500,
-            fontSize = 14.sp,
-            color = Gray700,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
     }
 }
 

@@ -31,9 +31,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.model.Card
-import woowacourse.kanban.board.model.Card.Companion.MAX_TAG_SIZE
 import woowacourse.kanban.board.model.Tag
-import woowacourse.kanban.board.model.Tag.Companion.MAX_TAG_LENGTH
 import woowacourse.kanban.board.model.UserInfo
 
 private const val DEFAULT_TITLE = "제목 없음"
@@ -87,21 +85,21 @@ fun Content(content: String) {
 }
 
 @Composable
-fun Tags(tags: List<Tag>, maxSize: Int = MAX_TAG_SIZE, maxLength: Int = MAX_TAG_LENGTH) {
+fun Tags(tags: List<Tag>) {
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        tags.take(maxSize).forEach { tag ->
-            Chip(tag.content, maxLength)
+        tags.forEach { tag ->
+            Chip(tag.content)
         }
     }
 }
 
 @Composable
-fun Chip(content: String, maxLength: Int = MAX_TAG_LENGTH) {
+fun Chip(content: String) {
     Text(
-        text = content.take(maxLength),
+        text = content,
         fontSize = 12.sp,
         fontWeight = FontWeight.W400,
         color = Gray700,

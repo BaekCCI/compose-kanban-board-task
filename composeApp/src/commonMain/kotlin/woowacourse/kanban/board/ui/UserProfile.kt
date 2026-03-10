@@ -24,12 +24,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.Gray500
 import woowacourse.kanban.board.Gray700
-import woowacourse.kanban.board.model.UserInfo
+import woowacourse.kanban.board.model.User
 
 private const val UNKNOWN_USER = "알 수 없는 유저"
 
 @Composable
-fun UserProfile(userInfo: UserInfo?, modifier: Modifier = Modifier) {
+fun UserProfile(userInfo: User?, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -62,5 +62,5 @@ fun UserProfile(userInfo: UserInfo?, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun UserPreView() {
-    UserProfile(UserInfo("다이노"))
+    UserProfile(User("다이노"))
 }

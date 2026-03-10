@@ -7,18 +7,17 @@ import androidx.compose.ui.test.runComposeUiTest
 import kotlin.test.Test
 import woowacourse.kanban.board.model.Card
 import woowacourse.kanban.board.model.Tag
-import woowacourse.kanban.board.model.UserInfo
+import woowacourse.kanban.board.model.User
 import woowacourse.kanban.board.ui.KanbanCard
 
 @OptIn(ExperimentalTestApi::class)
-class CardUiTest {
-
+class KanbanCardUiTest {
     @Test
     fun `모든 필드가 있는 카드 - 제목 설명 태그 유저 모두 노출`() = runComposeUiTest {
         val title = "LazyColumn 컴포넌트 구현"
         val content = "세로 스크롤 가능한 리스트 컴포넌트를 만들고 성능 최적화를 적용합니다."
         val tags = listOf(Tag("컴포넌트"), Tag("성능"))
-        val user = UserInfo(name = "다이노")
+        val user = User(name = "다이노")
 
         setContent {
             KanbanCard(Card(title = title, content = content, tags = tags, user = user))
@@ -36,7 +35,7 @@ class CardUiTest {
         val title = null
         val content = "세로 스크롤 가능한 리스트 컴포넌트를 만들고 성능 최적화를 적용합니다."
         val tags = listOf(Tag("컴포넌트"), Tag("성능"))
-        val user = UserInfo(name = "다이노")
+        val user = User(name = "다이노")
 
         setContent {
             KanbanCard(Card(title = title, content = content, tags = tags, user = user))

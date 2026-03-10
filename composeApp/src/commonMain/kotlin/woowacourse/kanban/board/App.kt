@@ -7,6 +7,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import woowacourse.kanban.board.model.Card
 import woowacourse.kanban.board.model.Tag
 import woowacourse.kanban.board.model.UserInfo
+import woowacourse.kanban.board.ui.KanbanCard
 
 @Composable
 @Preview

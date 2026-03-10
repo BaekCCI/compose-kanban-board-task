@@ -35,9 +35,9 @@ private const val TITLE_MAX_LINE = 1
 private const val CONTENT_MAX_LINE = 2
 
 @Composable
-fun KanbanCard(card: Card) {
+fun KanbanCard(card: Card, modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .clip(shape = RoundedCornerShape(10.dp))
             .background(Color.White)
             .border(width = 1.dp, shape = RoundedCornerShape(10.dp), color = Gray200)
@@ -56,7 +56,7 @@ fun KanbanCard(card: Card) {
 }
 
 @Composable
-fun CardTitle(title: String?) {
+private fun CardTitle(title: String?) {
     Text(
         text = if (title.isNullOrBlank()) DEFAULT_TITLE else title,
         fontSize = 16.sp,
@@ -68,7 +68,7 @@ fun CardTitle(title: String?) {
 }
 
 @Composable
-fun Content(content: String) {
+private fun Content(content: String) {
     Text(
         text = content,
         fontSize = 14.sp,
@@ -80,7 +80,7 @@ fun Content(content: String) {
 }
 
 @Composable
-fun Tags(tags: List<Tag>) {
+private fun Tags(tags: List<Tag>) {
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -124,6 +124,6 @@ class CardPreviewParameterProvider : PreviewParameterProvider<Card> {
 
 @Composable
 @Preview
-fun KanbanCardPreview(@PreviewParameter(CardPreviewParameterProvider::class) data: Card) {
-    KanbanCard(data)
+fun KanbanCardPreview(@PreviewParameter(CardPreviewParameterProvider::class) card: Card) {
+    KanbanCard(card)
 }
